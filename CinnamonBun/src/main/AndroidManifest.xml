@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="Landroid">
+        <activity
+            android:name=".PlatLogoActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:enableOnBackInvokedCallback="true"
+            android:exported="true"
+            android:icon="@drawable/cinnamon_bun_platlogo"
+            android:label="@string/cinnamon_bun_egg_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            tools:targetApi="33" />
+
+        <!-- DreamService (Daydream screensaver): disabled by default, unlocked via egg -->
+        <service
+            android:name=".landroid.DreamUniverse"
+            android:description="@string/cinnamon_bun_dream_description"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/cinnamon_bun_android17_patch_adaptive"
+            android:label="@string/cinnamon_bun_egg_name"
+            android:permission="android.permission.BIND_DREAM_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.dream"
+                android:resource="@xml/cinnamon_bun_landroid_dream" />
+        </service>
+
+        <!-- MainActivity: the primary interactive "Landroid" game -->
+        <activity
+            android:name=".landroid.MainActivity"
+            android:configChanges="orientation|screenLayout|screenSize|density"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/cinnamon_bun_egg_name"
+            android:theme="@style/cinnamon_bun_Theme.Landroid">
+            <!-- standalone build: the game itself is the launcher entry -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
